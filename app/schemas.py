@@ -46,6 +46,23 @@ class ExperienceRead(BaseModel):
     created_at: datetime
 
 
+class OutcomeSubmit(BaseModel):
+    was_successful: bool
+    outcome: str | None = Field(default=None, max_length=4000)
+    failure_reason: str | None = Field(default=None, max_length=4000)
+
+
+class OutcomeRead(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    id: int
+    experience_id: int
+    was_successful: bool
+    outcome_description: str | None
+    failure_reason: str | None
+    recorded_at: datetime
+
+
 class Decision(StrEnum):
     approve = "approve"
     revise = "revise"

@@ -1,8 +1,9 @@
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
+from app.exceptions import DuplicateOutcomeError
 from app.models import Experience, Outcome
-from app.schemas import ExperienceCreate
+from app.schemas import ExperienceCreate, OutcomeSubmit
 
 
 class ExperienceRepository:
@@ -38,6 +39,21 @@ class ExperienceRepository:
     def all_with_embeddings(self) -> "list[Experience]":
         stmt = select(Experience).where(Experience.embedding.is_not(None))
         return list(self.db.scalars(stmt).all())
+
+    def add_outcome(self, experience: Experience, data: OutcomeSubmit) -> Outcome:
+        if experience.outcome is not None:
+            raise DuplicateOutcomeError(experience.id)
+        outcome = Outcome(
+            experience_id=experience.id,
+            was_successful=data.was_successful,
+            outcome_description=data.outcome,
+            failure_reason=data.failure_reason,
+        )
+        experience.status = "completed"
+        self.db.add(outcome)
+        self.db.commit()
+        self.db.refresh(outcome)
+        return outcome
 
     def tool_success_rate(self, tool_name: str) -> float | None:
         stmt = (

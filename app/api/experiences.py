@@ -8,7 +8,14 @@ from app.config import get_settings
 from app.database import get_db
 from app.exceptions import ExperienceNotFoundError
 from app.repositories.experience_repository import ExperienceRepository
-from app.schemas import ErrorResponse, ExperienceCreate, ExperienceRead, SimilarExperienceRead
+from app.schemas import (
+    ErrorResponse,
+    ExperienceCreate,
+    ExperienceRead,
+    OutcomeRead,
+    OutcomeSubmit,
+    SimilarExperienceRead,
+)
 from app.services.embedding_service import (
     EmbeddingProvider,
     build_embedding_text,
@@ -77,6 +84,20 @@ def get_experience(experience_id: int, db: DbSession) -> ExperienceRead:
     if experience is None:
         raise ExperienceNotFoundError(experience_id)
     return ExperienceRead.model_validate(experience)
+
+
+@router.patch(
+    "/{experience_id}/outcome",
+    response_model=OutcomeRead,
+    responses={404: {"model": ErrorResponse}, 409: {"model": ErrorResponse}},
+)
+def record_outcome(experience_id: int, data: OutcomeSubmit, db: DbSession) -> OutcomeRead:
+    repo = ExperienceRepository(db)
+    experience = repo.get(experience_id)
+    if experience is None:
+        raise ExperienceNotFoundError(experience_id)
+    outcome = repo.add_outcome(experience, data)
+    return OutcomeRead.model_validate(outcome)
 
 
 @router.delete(
