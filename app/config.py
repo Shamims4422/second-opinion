@@ -12,6 +12,7 @@ class Settings(BaseSettings):
     retrieval_limit: int = 5
     approve_threshold: float = 0.75
     block_threshold: float = 0.45
+    cors_origins: list[str] = ["http://localhost:8000", "http://127.0.0.1:8000"]
 
     model_config = SettingsConfigDict(env_prefix="CRITICLOOP_", env_file=".env")
 
