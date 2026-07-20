@@ -8,9 +8,10 @@ experiences and returns a transparent, statistically derived confidence score wi
 
 ## Status
 
-Phase 2 — SQLite persistence with experience CRUD endpoints
-(`POST/GET/DELETE /api/v1/experiences`). Retrieval, scoring, and the
-feedback loop land in the next phases.
+Phase 3 — local embeddings and similarity retrieval. Experiences are embedded
+with `all-MiniLM-L6-v2` (downloaded once, then cached) and
+`GET /api/v1/experiences/similar?task=...&action=...` returns the closest past
+experiences by cosine similarity. Scoring and the feedback loop land next.
 
 ## Quick start
 

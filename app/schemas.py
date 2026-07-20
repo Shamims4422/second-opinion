@@ -46,6 +46,15 @@ class ExperienceRead(BaseModel):
     created_at: datetime
 
 
+class SimilarExperienceRead(BaseModel):
+    experience_id: int
+    task: str
+    proposed_action: str
+    tool_name: ToolName
+    similarity: float
+    was_successful: bool | None
+
+
 class ErrorDetail(BaseModel):
     code: str
     message: str

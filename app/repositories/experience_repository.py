@@ -9,12 +9,13 @@ class ExperienceRepository:
     def __init__(self, db: Session) -> None:
         self.db = db
 
-    def create(self, data: ExperienceCreate) -> Experience:
+    def create(self, data: ExperienceCreate, embedding_json: str | None = None) -> Experience:
         experience = Experience(
             task=data.task,
             proposed_action=data.proposed_action,
             tool_name=data.tool_name.value,
             environment_context=data.environment_context,
+            embedding=embedding_json,
         )
         self.db.add(experience)
         self.db.commit()
@@ -31,6 +32,11 @@ class ExperienceRepository:
             .limit(limit)
             .offset(offset)
         )
+        return list(self.db.scalars(stmt).all())
+
+    # Quoted annotation: the `list` method above shadows the builtin in this class body.
+    def all_with_embeddings(self) -> "list[Experience]":
+        stmt = select(Experience).where(Experience.embedding.is_not(None))
         return list(self.db.scalars(stmt).all())
 
     def delete(self, experience: Experience) -> None:
