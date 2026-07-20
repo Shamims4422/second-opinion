@@ -8,7 +8,9 @@ experiences and returns a transparent, statistically derived confidence score wi
 
 ## Status
 
-Phase 1 — project skeleton with a working `/health` endpoint.
+Phase 2 — SQLite persistence with experience CRUD endpoints
+(`POST/GET/DELETE /api/v1/experiences`). Retrieval, scoring, and the
+feedback loop land in the next phases.
 
 ## Quick start
 
