@@ -46,6 +46,41 @@ class ExperienceRead(BaseModel):
     created_at: datetime
 
 
+class Decision(StrEnum):
+    approve = "approve"
+    revise = "revise"
+    block = "block"
+
+
+class SimilarEvidence(BaseModel):
+    experience_id: int
+    similarity: float
+    was_successful: bool | None
+
+
+class EvaluationRead(BaseModel):
+    evaluation_id: int
+    experience_id: int
+    decision: Decision
+    confidence: float
+    reason: str
+    evidence_count: int
+    similar_experiences: list[SimilarEvidence]
+    scoring_version: str
+
+
+class EvaluationHistoryItem(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    id: int
+    experience_id: int
+    confidence: float
+    decision: Decision
+    evidence_count: int
+    scoring_version: str
+    created_at: datetime
+
+
 class SimilarExperienceRead(BaseModel):
     experience_id: int
     task: str

@@ -8,10 +8,11 @@ experiences and returns a transparent, statistically derived confidence score wi
 
 ## Status
 
-Phase 3 — local embeddings and similarity retrieval. Experiences are embedded
-with `all-MiniLM-L6-v2` (downloaded once, then cached) and
-`GET /api/v1/experiences/similar?task=...&action=...` returns the closest past
-experiences by cosine similarity. Scoring and the feedback loop land next.
+Phase 4 — confidence scoring and the core evaluation endpoint.
+`POST /api/v1/evaluations` embeds the proposed action, retrieves similar past
+experiences, and returns an `approve`/`revise`/`block` decision with a
+transparent weighted confidence score (no LLM in the loop). The feedback
+endpoint that records real outcomes lands next.
 
 ## Quick start
 

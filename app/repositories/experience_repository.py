@@ -1,7 +1,7 @@
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from app.models import Experience
+from app.models import Experience, Outcome
 from app.schemas import ExperienceCreate
 
 
@@ -38,6 +38,17 @@ class ExperienceRepository:
     def all_with_embeddings(self) -> "list[Experience]":
         stmt = select(Experience).where(Experience.embedding.is_not(None))
         return list(self.db.scalars(stmt).all())
+
+    def tool_success_rate(self, tool_name: str) -> float | None:
+        stmt = (
+            select(Outcome.was_successful)
+            .join(Experience, Outcome.experience_id == Experience.id)
+            .where(Experience.tool_name == tool_name)
+        )
+        outcomes = list(self.db.scalars(stmt).all())
+        if not outcomes:
+            return None
+        return sum(1 for o in outcomes if o) / len(outcomes)
 
     def delete(self, experience: Experience) -> None:
         self.db.delete(experience)

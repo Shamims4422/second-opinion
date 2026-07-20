@@ -4,6 +4,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 
+from app.api.evaluations import router as evaluations_router
 from app.api.experiences import router as experiences_router
 from app.database import Base, engine
 from app.exceptions import CriticLoopError
@@ -23,6 +24,7 @@ app = FastAPI(
 )
 
 app.include_router(experiences_router)
+app.include_router(evaluations_router)
 
 
 @app.exception_handler(CriticLoopError)

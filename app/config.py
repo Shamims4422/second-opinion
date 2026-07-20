@@ -10,6 +10,8 @@ class Settings(BaseSettings):
     embedding_model_name: str = "sentence-transformers/all-MiniLM-L6-v2"
     min_similarity: float = 0.3
     retrieval_limit: int = 5
+    approve_threshold: float = 0.75
+    block_threshold: float = 0.45
 
     model_config = SettingsConfigDict(env_prefix="CRITICLOOP_", env_file=".env")
 
