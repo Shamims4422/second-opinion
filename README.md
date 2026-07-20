@@ -8,11 +8,10 @@ experiences and returns a transparent, statistically derived confidence score wi
 
 ## Status
 
-Phase 5 — the full evaluate → act → report loop works. `POST /api/v1/evaluations`
-returns an `approve`/`revise`/`block` decision with a transparent weighted
-confidence score, and `PATCH /api/v1/experiences/{id}/outcome` feeds real
-outcomes back into future scores (verified by tests that show scores changing
-after outcomes are recorded). Web UI, Docker, and CI land next.
+Phase 6 — working web UI at `/ui` (plain HTML/CSS/JS) on top of the full
+evaluate → act → report loop, plus a seed script
+(`python scripts/seed_database.py`) that loads 40 example experiences with
+outcomes. Docker, CI, and the full README land next.
 
 ## Quick start
 

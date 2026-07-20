@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CriticLoop</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="container">
+    <header>
+      <h1>CriticLoop</h1>
+      <p class="tagline">Experience-based risk scoring for AI-agent actions</p>
+    </header>
+
+    <section class="card">
+      <h2>Evaluate a proposed action</h2>
+      <form id="evaluate-form">
+        <label for="task">Task</label>
+        <input id="task" name="task" required maxlength="2000"
+               placeholder="Find the cheapest nonstop flight to Chicago">
+
+        <label for="proposed_action">Proposed action</label>
+        <input id="proposed_action" name="proposed_action" required maxlength="2000"
+               placeholder="Click the first sponsored flight result">
+
+        <label for="tool_name">Tool</label>
+        <select id="tool_name" name="tool_name">
+          <option value="browser">browser</option>
+          <option value="filesystem">filesystem</option>
+          <option value="shell">shell</option>
+          <option value="email">email</option>
+        </select>
+
+        <label for="environment_context">Environment context <span class="muted">(optional)</span></label>
+        <input id="environment_context" name="environment_context" maxlength="4000"
+               placeholder="Search result page">
+
+        <button type="submit" id="evaluate-button">Evaluate</button>
+      </form>
+      <p id="evaluate-error" class="error" hidden></p>
+    </section>
+
+    <section class="card" id="result-card" hidden>
+      <h2>Result</h2>
+      <div class="result-header">
+        <span id="decision-badge" class="badge"></span>
+        <div class="confidence">
+          <div class="confidence-track"><div id="confidence-fill" class="confidence-fill"></div></div>
+          <span id="confidence-label"></span>
+        </div>
+      </div>
+      <p id="reason"></p>
+      <p class="muted" id="evidence-summary"></p>
+      <table id="similar-table" hidden>
+        <thead>
+          <tr><th>Experience</th><th>Similarity</th><th>Outcome</th></tr>
+        </thead>
+        <tbody id="similar-body"></tbody>
+      </table>
+    </section>
+
+    <section class="card" id="outcome-card" hidden>
+      <h2>Report what actually happened</h2>
+      <p class="muted">Experience #<span id="outcome-experience-id"></span> — outcomes feed future scores.</p>
+      <form id="outcome-form">
+        <label>Result</label>
+        <div class="radio-row">
+          <label class="radio"><input type="radio" name="was_successful" value="true" checked> Succeeded</label>
+          <label class="radio"><input type="radio" name="was_successful" value="false"> Failed</label>
+        </div>
+
+        <label for="outcome">What happened <span class="muted">(optional)</span></label>
+        <input id="outcome" name="outcome" maxlength="4000" placeholder="The selected flight had one stop.">
+
+        <label for="failure_reason">Failure reason <span class="muted">(optional)</span></label>
+        <input id="failure_reason" name="failure_reason" maxlength="4000"
+               placeholder="The action ignored the nonstop requirement.">
+
+        <button type="submit" id="outcome-button">Submit outcome</button>
+      </form>
+      <p id="outcome-message" class="muted" hidden></p>
+      <p id="outcome-error" class="error" hidden></p>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

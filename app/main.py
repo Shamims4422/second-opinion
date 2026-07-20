@@ -1,8 +1,10 @@
 from collections.abc import AsyncGenerator
 from contextlib import asynccontextmanager
+from pathlib import Path
 
 from fastapi import FastAPI, Request
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, RedirectResponse
+from fastapi.staticfiles import StaticFiles
 
 from app.api.evaluations import router as evaluations_router
 from app.api.experiences import router as experiences_router
@@ -25,6 +27,12 @@ app = FastAPI(
 
 app.include_router(experiences_router)
 app.include_router(evaluations_router)
+app.mount("/ui", StaticFiles(directory=Path(__file__).parent / "static", html=True), name="ui")
+
+
+@app.get("/", include_in_schema=False)
+def root() -> RedirectResponse:
+    return RedirectResponse(url="/ui/")
 
 
 @app.exception_handler(CriticLoopError)
