@@ -1,8 +1,8 @@
-# CriticLoop
+# SecondOpinion
 
 Experience-based risk scoring for AI-agent actions — fully local, $0 to run, no API keys.
 
-An AI agent (or a person) submits a proposed action. CriticLoop compares it against similar
+An AI agent (or a person) submits a proposed action. SecondOpinion compares it against similar
 past experiences using local sentence embeddings, checks which of those succeeded or failed,
 and returns a transparent, statistically derived confidence score with a decision:
 **approve**, **revise**, or **block**. After the action runs, the caller reports the real
@@ -15,7 +15,7 @@ See [PLAN.md](PLAN.md) for the full specification.
 AI agents fail in repetitive, predictable ways: clicking sponsored results that ignore the
 user's constraints, deleting too broadly, replying-all to the wrong thread. Most agent stacks
 either don't check proposed actions at all, or ask another LLM to judge them — which is slow,
-costly, and opaque. CriticLoop takes a different position: **if an action similar to this one
+costly, and opaque. SecondOpinion takes a different position: **if an action similar to this one
 has failed before, that is evidence worth acting on**, and simple weighted statistics over
 recorded outcomes are enough to surface it — reproducibly, in milliseconds, for free.
 
@@ -77,8 +77,8 @@ your own outcome data.
 Requires Python 3.12+.
 
 ```bash
-git clone https://github.com/<you>/criticloop.git
-cd criticloop
+git clone https://github.com/<you>/secondopinion.git
+cd secondopinion
 python -m venv .venv
 .venv\Scripts\activate          # Windows (use `source .venv/bin/activate` on macOS/Linux)
 pip install -e ".[dev]"
@@ -100,12 +100,12 @@ python scripts/seed_database.py
 ### Docker
 
 ```bash
-docker build -t criticloop .
-docker run -p 8000:8000 criticloop
+docker build -t secondopinion .
+docker run -p 8000:8000 secondopinion
 ```
 
 The container runs as a non-root user and keeps its SQLite database and model cache in
-`/srv/criticloop/data`.
+`/srv/secondopinion/data`.
 
 ## API examples
 
@@ -214,5 +214,5 @@ calibration-curve visualizations.
 
 ## Research inspiration
 
-> CriticLoop is inspired by research on experience-based confidence estimation, but the
+> SecondOpinion is inspired by research on experience-based confidence estimation, but the
 > application architecture, scoring system, and implementation were developed independently.

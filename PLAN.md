@@ -1,14 +1,14 @@
-# CriticLoop: Experience-Based Risk Scoring for AI Agents
+# SecondOpinion: Experience-Based Risk Scoring for AI Agents
 
 **One-line description:** A Python service that predicts the reliability of proposed AI-agent actions using similar past experiences and weighted statistical scoring — no paid APIs, no cloud services, fully local.
 
-**GitHub repository name:** `criticloop`
+**GitHub repository name:** `secondopinion`
 
 **Cost to build and run:** $0. Everything runs on your own machine.
 
 ---
 
-## 1. What CriticLoop Does
+## 1. What SecondOpinion Does
 
 A user or AI agent submits:
 
@@ -17,7 +17,7 @@ A user or AI agent submits:
 - The tool it plans to use
 - Optional environment context
 
-CriticLoop then:
+SecondOpinion then:
 
 1. Finds similar previous actions using local sentence embeddings.
 2. Reviews which of those previous actions succeeded or failed.
@@ -112,7 +112,7 @@ These are documented as **future extensions** in Section 18, not part of the cur
 ## 5. Repository Structure
 
 ```text
-criticloop/
+secondopinion/
 ├── app/
 │   ├── __init__.py
 │   ├── main.py
@@ -442,7 +442,7 @@ Python 3.12 venv → FastAPI → `/health` endpoint → Ruff + Pytest → first 
 from fastapi import FastAPI
 
 app = FastAPI(
-    title="CriticLoop",
+    title="SecondOpinion",
     description="Experience-based risk scoring for AI-agent actions.",
     version="0.1.0",
 )
@@ -522,7 +522,7 @@ Take longer if needed — understanding every part matters more than speed.
 10. Limitations
 11. Future improvements (link to Section 18 below)
 12. Research inspiration disclosure:
-    > CriticLoop is inspired by research on experience-based confidence estimation, but the application architecture, scoring system, and implementation were developed independently.
+    > SecondOpinion is inspired by research on experience-based confidence estimation, but the application architecture, scoring system, and implementation were developed independently.
 
 ---
 

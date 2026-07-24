@@ -1,4 +1,4 @@
-class CriticLoopError(Exception):
+class SecondOpinionError(Exception):
     """Base for domain errors rendered as {"error": {"code", "message"}} responses."""
 
     status_code = 400
@@ -9,7 +9,7 @@ class CriticLoopError(Exception):
         self.message = message
 
 
-class ExperienceNotFoundError(CriticLoopError):
+class ExperienceNotFoundError(SecondOpinionError):
     status_code = 404
     code = "EXPERIENCE_NOT_FOUND"
 
@@ -17,7 +17,7 @@ class ExperienceNotFoundError(CriticLoopError):
         super().__init__(f"No experience exists with ID {experience_id}.")
 
 
-class DuplicateOutcomeError(CriticLoopError):
+class DuplicateOutcomeError(SecondOpinionError):
     status_code = 409
     code = "DUPLICATE_OUTCOME"
 

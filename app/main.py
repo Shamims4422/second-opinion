@@ -14,9 +14,9 @@ from app.api.evaluations import router as evaluations_router
 from app.api.experiences import router as experiences_router
 from app.config import get_settings
 from app.database import Base, engine
-from app.exceptions import CriticLoopError
+from app.exceptions import SecondOpinionError
 
-logger = logging.getLogger("criticloop")
+logger = logging.getLogger("secondopinion")
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(name)s %(levelname)s %(message)s")
 
 
@@ -27,7 +27,7 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
 
 
 app = FastAPI(
-    title="CriticLoop",
+    title="SecondOpinion",
     description="Experience-based risk scoring for AI-agent actions.",
     version="0.1.0",
     lifespan=lifespan,
@@ -64,8 +64,8 @@ async def log_requests(
     return response
 
 
-@app.exception_handler(CriticLoopError)
-async def criticloop_error_handler(request: Request, exc: CriticLoopError) -> JSONResponse:
+@app.exception_handler(SecondOpinionError)
+async def secondopinion_error_handler(request: Request, exc: SecondOpinionError) -> JSONResponse:
     logger.warning("domain_error code=%s message=%s", exc.code, exc.message)
     return JSONResponse(
         status_code=exc.status_code,

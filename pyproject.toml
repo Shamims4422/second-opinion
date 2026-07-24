@@ -3,7 +3,7 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "criticloop"
+name = "secondopinion"
 version = "0.1.0"
 description = "Experience-based risk scoring for AI-agent actions."
 readme = "README.md"

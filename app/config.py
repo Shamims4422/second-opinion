@@ -4,9 +4,9 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
-    """Application settings, overridable via CRITICLOOP_-prefixed environment variables."""
+    """Application settings, overridable via SECONDOPINION_-prefixed environment variables."""
 
-    database_url: str = "sqlite:///./criticloop.db"
+    database_url: str = "sqlite:///./secondopinion.db"
     embedding_model_name: str = "sentence-transformers/all-MiniLM-L6-v2"
     min_similarity: float = 0.3
     retrieval_limit: int = 5
@@ -14,7 +14,7 @@ class Settings(BaseSettings):
     block_threshold: float = 0.45
     cors_origins: list[str] = ["http://localhost:8000", "http://127.0.0.1:8000"]
 
-    model_config = SettingsConfigDict(env_prefix="CRITICLOOP_", env_file=".env")
+    model_config = SettingsConfigDict(env_prefix="SECONDOPINION_", env_file=".env")
 
 
 @lru_cache
