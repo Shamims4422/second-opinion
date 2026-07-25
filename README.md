@@ -1,12 +1,12 @@
 # SecondOpinion
 
-Experience-based risk scoring for AI-agent actions — fully local, $0 to run, no API keys.
+Experience-based risk scoring for AI-agent actions (fully local, $0 to run, no API keys).
 
 An AI agent (or a person) submits a proposed action. SecondOpinion compares it against similar
 past experiences using local sentence embeddings, checks which of those succeeded or failed,
 and returns a transparent, statistically derived confidence score with a decision:
 **approve**, **revise**, or **block**. After the action runs, the caller reports the real
-outcome — and that outcome changes future scores.
+outcome and that outcome changes future scores.
 
 See [PLAN.md](PLAN.md) for the full specification.
 
