@@ -1,4 +1,3 @@
-<img width="1198" height="411" alt="image" src="https://github.com/user-attachments/assets/a26fdf77-1208-49b9-a512-ef58103aaf45" />
 # SecondOpinion
 
 Experience-based risk scoring for AI-agent actions — fully local, $0 to run, no API keys.
