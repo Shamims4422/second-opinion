@@ -1,3 +1,4 @@
+<img width="1198" height="411" alt="image" src="https://github.com/user-attachments/assets/a26fdf77-1208-49b9-a512-ef58103aaf45" />
 # SecondOpinion
 
 Experience-based risk scoring for AI-agent actions — fully local, $0 to run, no API keys.
@@ -77,8 +78,8 @@ your own outcome data.
 Requires Python 3.12+.
 
 ```bash
-git clone https://github.com/<you>/secondopinion.git
-cd secondopinion
+git clone https://github.com/Shamims4422/second-opinion.git
+cd second-opinion
 python -m venv .venv
 .venv\Scripts\activate          # Windows (use `source .venv/bin/activate` on macOS/Linux)
 pip install -e ".[dev]"
